@@ -123,3 +123,6 @@ a:hover{
         border-radius: 0;
     }
 }
+#error-message{
+    color: red;
+}
