@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+:root{
+    --accent-color: #0000B3
+    --base-color: #CDE9FE
+    --text-color: #000000
+    --input-color: #000000
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-family: Oswald, Roboto, Raleway;
+    font-size: 11pt;
+    color: var(--text-color);
+    text-align: center;
+}
+body{
+    min-height: 100vh;
+    background-image: url(/img/signup-background.jpg);
+    background-size: cover;
+    background-blend-mode: lighten;
+    overflow: hidden;
+}
+.wrapper{
+    box-sizing: border-box;
+    background-color: var(--base-color);
+    height: max(50%, 500px);
+    width: max(50%, 700px);
+    padding: 10px;
+    border-radius: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+h1{
+    font-size: 4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+form{
+    width: min(400px, 100%);
+    margin-top: 20px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+form > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+form label{
+    flex-shrink: 0;
+    height: 50px;
+    width: 50px;
+    background-color: var(--accent-color);
+    fill: var(--base-color);
+    border-radius: 5px 0 0 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form input{
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: 0;
+    height: 50px;
+    padding: 1em;
+    font: inherit;
+    border-radius: 0 5px 5px 0;
+    border: 2px solid var(--input-color);
+    background-color: var(--input-color);
+    transition: 150ms ease;
+}
+form input:hover{
+    outline: auto;
+    border-color: var(--accent-color);
+}
+form input:focus{
+    border-color: var(--text-color);
+}
+div:has(input:focus) > label{
+    background-color: var(--text-color);
+}
+form input::placeholder{
+    color: var(--text-color);
+    opacity: 1;
+}
+form button{
+    margin-top: 5px;
+    border: none;
+    border-radius: 1000px;
+    padding: .85em 4em;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    font: inherit;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 150ms ease;
+}
+form button:hover{
+    outline: auto;
+    background-color: var(--text-color);
+}
+form button:focus{
+    background-color: var(--text-color)
+}
+a{
+    text-decoration: none;
+    color: var(--accent-color);
+}
+a:hover{
+    text-decoration: underline;
+}
+@media(max-width: 1000){
+    .wrapper{
+        width: min(600px, 100%);
+        border-radius: 0;
+    }
+}
