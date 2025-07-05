@@ -4,12 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" contents="width=device-width, initial-scale=1.0">
         <title>Signup</title>
-        <link rel="stylesheet" href="signup-style.css">
+        <link rel="stylesheet" href="/styles/signup-style.css">
     </head>
     <body>
         <div class="wrapper">
-            <h1>Signup</h1>
-            <form>
+            <h1>Signups</h1>
+            <form id="registerForm">
                 <div>
                     <label for="username-input">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M560-440h200v-80H560v80Zm0-120h200v-80H560v80ZM200-320h320v-22q0-45-44-71.5T360-440q-72 0-116 26.5T200-342v22Zm160-160q33 0 56.5-23.5T440-560q0-33-23.5-56.5T360-640q-33 0-56.5 23.5T280-560q0 33 23.5 56.5T360-480ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Z"/></svg>
@@ -38,5 +38,36 @@
             </form>
             <p>Already have an account? <a href="login.html">login</a></p>
         </div>
+        
+        <script>
+            document.getElementById('registerForm').addEventListener('submit', async (e) => {e.preventDefault()
+              
+                const username = document.getElementById('username-input').value;
+                const email = document.getElementById('email-input').value;
+                const password = document.getElementById('password-input').value;
+                const repeatPassword = document.getElementById('repeat-password-input').value;
+                
+                if (password != repeatPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify({username, email, password})
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    alert('Registration Successful!');
+                    window.location.href = 'login.html';
+                } 
+                else {
+                    alert ('Error: ' + data.message);
+                }
+            })
+        </script>
     </body>
 </html>
