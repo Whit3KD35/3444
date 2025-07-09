@@ -32,28 +32,51 @@
     </section>
 
     <script type="module">
-        import { loadHeader } from './js/header.js';
+        //Load Header
+        import { loadHeader } from "./js/header.js";
         loadHeader();
 
+        //Listen for event from Login Form
         document.addEventListener("DOMContentLoaded", () => {
             const form = document.getElementById("LoginForm");
-            const messageBox = document.getElementById("loginMessage");
-
-            form.addEventListener("submit", (e) => {
+            
+            form.addEventListener("submit", async (e) => {
                 e.preventDefault();
                 console.log("Form submitted");
 
+                // Set Username and Password
                 const username = document.getElementById("username").value.trim();
                 const password = document.getElementById("password").value;
+                
+                try{
+                    // Call Login function
+                    const response = await fetch("/api/login", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': "application/json"
+                        },
+                        body: JSON.stringify({ username, password})
+                    });
+                    
+                    // Wait for Response
+                    const data = await response.json();
 
-                // Temp for test
-                if (username === "admin" && password === "password123") {
-                    sessionStorage.setItem("loggedIn", "true");
-                    sessionStorage.setItem("username", username);
-                    window.location.href = "index.html";
-                } else {
-                    alert("Invalid username or password.");
+                    // Login Success
+                    if (data.success) {
+                        sessionStorage.setItem("loggedIn", "true");
+                        sessionStorage.setItem("username", username);
+                        window.location.href = "index.html";
+                    } 
+
+                    // Float Fail up to console
+                    else {
+                        alert(data.message);
+                    }
+                } catch (error) {
+                    console.error("Login failed: ", error);
+                    alert("Login error, try again later");
                 }
+
             });
         });
     </script>
