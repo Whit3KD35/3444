@@ -26,3 +26,27 @@ CREATE TABLE questions (
         ON DELETE CASCADE
     );
     
+CREATE TABLE flashcard_set (
+    set_ID SERIAL PRIMARY KEY,
+    title VARCHAR(50) NOT NULL,
+    description TEXT,
+    is_public BOOLEAN NOT NULL,
+    creator_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_flashset
+        FOREIGN KEY (creator_id)
+        REFERENCES  users(user_id),
+        ON DELETE CASCADE
+);
+
+CREATE TABLE flashcards (
+    flashcard_ID SERIAL PRIMARY KEY,
+    question VARCHAR(50) NOT NULL,
+    answer TEXT,
+    flashset_ID INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_flashset
+        FOREIGN KEY (flashset_ID)
+        REFERENCES  flashcard_set(set_ID)
+        ON DELETE CASCADE
+);

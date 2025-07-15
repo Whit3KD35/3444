@@ -22,11 +22,11 @@ export function loadHeader() {
 
     // Create Links 
     const links = [
-        { text: "Flash Cards", href: "#" },
-        { text: "Quizes", href: "#" },
-        { text: "Games", href: "#" },
-        { text: "Calander", href: "#" },
-        { text: "Stats", href: "#" }
+        { text: "Flash Cards", href: "Flashcardsets.html" },
+        { text: "Quizes", href: "quiz.html" },
+        { text: "Games", href: "games.html" },
+        { text: "Calander", href: "calander.html" },
+        { text: "Stats", href: "stats.html" }
     ];
 
     // Style Links
@@ -41,7 +41,6 @@ export function loadHeader() {
 
         nav.appendChild(a);
     });
-
 
     //Create Login/Logout button
     const authLink = document.createElement("a");
